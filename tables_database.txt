@@ -1,0 +1,55 @@
+CREATE TABLE cliente
+(
+    id_cliente integer PRIMARY KEY NOT NULL,
+    nome character varying(50),
+    endereco character varying(50),
+    telefone character varying(15),
+    cpf character varying(15),
+    datanascimento date,
+    cnpj character varying(50)
+);
+
+
+
+
+
+CREATE TABLE veiculo
+(
+    id_veiculo integer PRIMARY KEY NOT NULL,
+    marca character varying(15),
+    modelo character varying(15),
+    ano_fabricacao integer,
+    ano_modelo integer,
+    placa character varying(15),
+    cap_passageiros integer,
+    qtd_portas integer,
+    cap_carga double precision,
+    num_eixos integer
+);
+
+
+CREATE TABLE locacao
+(
+    id_locacao integer PRIMARY KEY NOT NULL,
+    id_cliente integer not null,
+    preco double precision,
+    multa double precision,
+    status integer,
+    data_inicio date,
+    data_prev_devolucao date,
+    data_devolucao date,
+    FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente)
+);
+
+CREATE TABLE veiculo_locacao
+(
+    id_locacao integer not null,
+    id_veiculo integer not null,
+    FOREIGN KEY (id_locacao) REFERENCES locacao (id_locacao),
+    FOREIGN KEY (id_veiculo) REFERENCES veiculo (id_veiculo)
+);
+
+
+
+
+
